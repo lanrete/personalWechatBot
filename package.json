@@ -1,0 +1,17 @@
+{
+  "name": "wechatautomation",
+  "version": "1.0.0",
+  "description": "To automate the process of receiving images and sharing from wechatbot to create weekly summary ppt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ppt"
+  ],
+  "author": "Lanrete",
+  "license": "ISC",
+  "dependencies": {
+    "wechaty": "^0.22.6"
+  }
+}
