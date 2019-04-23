@@ -1,4 +1,4 @@
-const { Wechaty } = require("wechaty");
+import { Wechaty } from "wechaty";
 const bot = new Wechaty();
 
 bot.on("scan", (qrcode, status) =>
