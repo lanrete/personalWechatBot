@@ -1,15 +1,27 @@
-import { Wechaty } from "wechaty";
+import {Wechaty} from "wechaty";
+
 const bot = new Wechaty();
 
-bot.on("scan", (qrcode, status) =>
-  console.log(
-    [
-      "https://api.qrserver.com/v1/create-qr-code/?data=",
-      encodeURIComponent(qrcode),
-      "&size=220x220&margin=20"
-    ].join("")
-  )
-);
-bot.on("login", user => console.log(`User ${user} logined`));
-bot.on("message", message => console.log(`Message: ${message}`))
-bot.start()
+
+function getQrCode(qrcode, status) {
+    return console.log(
+        [
+            "https://api.qrserver.com/v1/create-qr-code/?data=",
+            encodeURIComponent(qrcode),
+            "&size=220x220&margin=20"
+        ].join("")
+    );
+}
+
+function logLogin(user) {
+    console.log(`User ${user} logged in`);
+}
+
+function logMessage(message) {
+    console.log(`Message: ${message}`)
+}
+
+bot.on("scan", getQrCode);
+bot.on("login", logLogin);
+bot.on("message", logMessage);
+bot.start();
