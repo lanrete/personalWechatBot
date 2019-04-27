@@ -18,7 +18,7 @@ function onLogin(user) {
 }
 
 function onLogout(user) {
-  console.log(`${user} login`);
+  console.log(`${user} logout`);
 }
 
 async function onMessage(message) {
