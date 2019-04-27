@@ -10,6 +10,7 @@ function processRemind(messageString) {
   var timespan = tokens[0];
   tokens.shift();
   var actualMessage = tokens.join(" ");
+  actualMessage = `Remind you to [${actualMessage}] as ordered [${timespan}] ago.`
 
   var returnMessage = `Cannot parse${timespan}`;
   var isSuccess = false;
@@ -43,6 +44,23 @@ function processRemind(messageString) {
   return retObj;
 }
 
+/**
+ *
+ * @param {String} messageString
+ */
+function processTopic(messageString) {
+  messageString = messageString.replace("!topic ", "");
+  var tokens = messageString.split(" ");
+  if (!tokens.length === 1) {
+    tokens.shift();
+  }
+  var newTheme = tokens.join(" ");
+  var returnMessage = `Changing topic to ${newTheme}`;
+  status["theme"] = newTheme;
+  return { returnMessage: returnMessage };
+}
+
 module.exports = {
-  processRemind: processRemind
+  processRemind: processRemind,
+  processTopic: processTopic
 };

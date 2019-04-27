@@ -1,5 +1,5 @@
 const { Message } = require("wechaty");
-const { processRemind } = require("./textFunctions");
+const { processRemind, processTopic } = require("./textFunctions");
 const moment = require("moment");
 
 /**
@@ -23,6 +23,11 @@ function processText(message) {
           parseResult.remindTime.diff(moment())
         );
       }
+      break;
+    case (text.match("^!topic") || {}).input:
+      console.log("A change in topic");
+      var parseResult = processTopic(text);
+      message.say(parseResult.returnMessage);
       break;
     default:
       console.log("Doesn't match anything");
