@@ -1,12 +1,9 @@
 var tools = require("./tools");
-var schedule = require("node-schedule");
 var moment = require("moment");
 
-var message = tools.remind("1min", "testing");
-console.log(message.message);
+var message = tools.parseRemindText("!remind me 2min 吃饭")
 
-// TODO Need to change the console log messages, is putting too much information in it
 setTimeout(
-  _ => console.log(`Reminding about ${message.message}`),
+  _ => console.log(message.reminder),
   message.moment.diff(moment())
 );

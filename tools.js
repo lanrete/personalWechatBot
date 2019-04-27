@@ -1,10 +1,15 @@
 var moment = require("moment");
 
 /**
- * @param {String} time
- * @param {String} message
+ * @param {String} rawMessage
  */
-function remind(time, message) {
+function parseRemindText(rawMessage) {
+  rawMessage = rawMessage.replace("!remind me ", "");
+  var tokens = rawMessage.split(" ");
+  var time = tokens[0];
+  tokens.shift();
+  var message = tokens.join(" ");
+
   var messageText = `无法解析${time}`;
   var isSuccess = false;
   if (time.includes("min")) {
@@ -14,11 +19,6 @@ function remind(time, message) {
       "DD-MMM HH:mm"
     )}`;
     isSuccess = true;
-    return {
-      message: messageText,
-      isSuccess: isSuccess,
-      moment: remindTime
-    };
   }
   if (time.includes("hour")) {
     let number_part = Number(time.replace("hour", ""));
@@ -26,18 +26,19 @@ function remind(time, message) {
     messageText = `Will remind you about ${message} at ${remindTime.format(
       "DD-MMM HH:mm"
     )}`;
-    return {
-      message: messageText,
-      isSuccess: isSuccess,
-      moment: remindTime
-    };
+    isSuccess = true;
   }
-  return {
+  var ret_obj = {
     message: messageText,
     isSuccess: isSuccess
   };
+  if (isSuccess) {
+    ret_obj["moment"] = remindTime;
+    ret_obj["reminder"] = message;
+  }
+  return ret_obj;
 }
 
 module.exports = {
-  remind: remind
+  parseRemindText: parseRemindText
 };
