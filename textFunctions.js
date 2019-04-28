@@ -10,11 +10,11 @@ function processRemind(messageString) {
   var timespan = tokens[0];
   tokens.shift();
   var actualMessage = tokens.join(" ");
-  actualMessage = `Remind you to [${actualMessage}] as ordered [${timespan}] ago.`
+  actualMessage = `Remind you to [${actualMessage}] as ordered [${timespan}] ago.`;
 
   var returnMessage = `Cannot parse${timespan}`;
   var isSuccess = false;
-  var numberPart = 0;
+  var numberPart;
   var remindTime;
 
   if (timespan.includes("min")) {

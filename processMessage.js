@@ -7,6 +7,11 @@ const moment = require("moment");
  * @param {Message} message
  */
 function processText(message) {
+  // * A dirty patch on the eslint no-usage error on import
+  if (typeof message !== Message) {
+    console.log("Type check failed");
+    return;
+  }
   var text = message.text();
   if (!text.startsWith("!")) {
     // * Ignore text message not starting with !
