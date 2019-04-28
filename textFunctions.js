@@ -14,18 +14,20 @@ function processRemind(messageString) {
 
   var returnMessage = `Cannot parse${timespan}`;
   var isSuccess = false;
+  var numberPart = 0;
+  var remindTime;
 
   if (timespan.includes("min")) {
-    var numberPart = Number(timespan.replace("min", ""));
-    var remindTime = moment().add(numberPart, "minutes");
+    numberPart = Number(timespan.replace("min", ""));
+    remindTime = moment().add(numberPart, "minutes");
     returnMessage = `Will remind you about [${actualMessage}] at ${remindTime.format(
       "DD-MMM HH:mm"
     )}`;
     isSuccess = true;
   }
   if (timespan.includes("hour")) {
-    var numberPart = Number(timespan.replace("hour", ""));
-    var remindTime = moment().add(numberPart, "hour");
+    numberPart = Number(timespan.replace("hour", ""));
+    remindTime = moment().add(numberPart, "hour");
     returnMessage = `Will remind you about [${actualMessage}] at ${remindTime.format(
       "DD-MMM HH:mm"
     )}`;

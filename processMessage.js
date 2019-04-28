@@ -15,11 +15,11 @@ function processText(message) {
   switch (text) {
     case (text.match("^!remind") || {}).input: {
       console.log("A reminder message");
-      var parseResult = processRemind(text);
+      let parseResult = processRemind(text);
       message.say(parseResult.returnMessage);
       if (parseResult.isSuccess) {
         setTimeout(
-          _ => message.say(parseResult.remindMessage),
+          () => message.say(parseResult.remindMessage),
           parseResult.remindTime.diff(moment())
         );
       }
@@ -27,7 +27,7 @@ function processText(message) {
     }
     case (text.match("^!topic") || {}).input: {
       console.log("A change in topic");
-      var parseResult = processTopic(text);
+      let parseResult = processTopic(text);
       message.say(parseResult.returnMessage);
       break;
     }
