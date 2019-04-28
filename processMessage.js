@@ -13,7 +13,7 @@ function processText(message) {
     return;
   }
   switch (text) {
-    case (text.match("^!remind") || {}).input:
+    case (text.match("^!remind") || {}).input: {
       console.log("A reminder message");
       var parseResult = processRemind(text);
       message.say(parseResult.returnMessage);
@@ -24,14 +24,17 @@ function processText(message) {
         );
       }
       break;
-    case (text.match("^!topic") || {}).input:
+    }
+    case (text.match("^!topic") || {}).input: {
       console.log("A change in topic");
       var parseResult = processTopic(text);
       message.say(parseResult.returnMessage);
       break;
-    default:
+    }
+    default: {
       console.log("Doesn't match anything");
       return;
+    }
   }
 }
 
