@@ -1,9 +1,10 @@
 const qrTerm = require("qrcode-terminal");
-const { Message } = require("wechaty");
-const { processText } = require("./processMessage");
+const {Message} = require("wechaty");
+const {processText} = require("./processMessage");
 
 function onScan(qrCode, status) {
-  qrTerm.generate(qrCode, { small: true });
+  console.log(status);
+  qrTerm.generate(qrCode, {small: true});
 }
 
 function onLogin(user) {
@@ -16,7 +17,7 @@ function onLogin(user) {
  */
 function onMessage(message) {
   console.log(`RECV: ${message}`);
-  var sender = message.from();
+  let sender = message.from();
 
   if (sender.self()) {
     // * Ignore messages from self
@@ -35,7 +36,9 @@ function onMessage(message) {
   }
 }
 
-function onError(error) {}
+function onError(error) {
+  console.log(error)
+}
 
 module.exports = {
   onScan: onScan,

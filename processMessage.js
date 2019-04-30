@@ -5,14 +5,12 @@ const moment = require("moment");
 /**
  *
  * @param {Message} message
+ * @returns {Promise<void>}
  */
-function processText(message) {
+async function processText(message) {
   // * A dirty patch on the eslint no-usage error on import
-  if (typeof message !== Message) {
-    console.log("Type check failed");
-    return;
-  }
-  var text = message.text();
+  console.log(Message.Type);
+  let text = message.text();
   if (!text.startsWith("!")) {
     // * Ignore text message not starting with !
     return;
@@ -21,7 +19,7 @@ function processText(message) {
     case (text.match("^!remind") || {}).input: {
       console.log("A reminder message");
       let parseResult = processRemind(text);
-      message.say(parseResult.returnMessage);
+      await message.say(parseResult.returnMessage);
       if (parseResult.isSuccess) {
         setTimeout(
           () => message.say(parseResult.remindMessage),
@@ -33,7 +31,7 @@ function processText(message) {
     case (text.match("^!topic") || {}).input: {
       console.log("A change in topic");
       let parseResult = processTopic(text);
-      message.say(parseResult.returnMessage);
+      await message.say(parseResult.returnMessage);
       break;
     }
     default: {

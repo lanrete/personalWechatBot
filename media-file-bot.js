@@ -1,8 +1,5 @@
 const qrTerm = require("qrcode-terminal");
 const { Message, Wechaty } = require("wechaty");
-const fs = require("fs");
-const schedule = require("node-schedule");
-const moment = require("moment");
 
 // import qrTerm from "qrcode-terminal";
 // import {Message, Wechaty} from "wechaty";
@@ -30,7 +27,7 @@ async function onMessage(message) {
   }
 
   if (message.type() === Message.Type.Text) {
-    var text = message.text();
+    let text = message.text();
     if (!text.startsWith("!")) {
       // * Ignore all messages not starting with !
       return;

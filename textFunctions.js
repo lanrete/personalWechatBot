@@ -1,4 +1,4 @@
-var moment = require("moment");
+const moment = require("moment");
 
 /**
  *
@@ -6,16 +6,16 @@ var moment = require("moment");
  */
 function processRemind(messageString) {
   messageString = messageString.replace("!remind ", "");
-  var tokens = messageString.split(" ");
-  var timespan = tokens[0];
+  let tokens = messageString.split(" ");
+  let timespan = tokens[0];
   tokens.shift();
-  var actualMessage = tokens.join(" ");
+  let actualMessage = tokens.join(" ");
   actualMessage = `Remind you to [${actualMessage}] as ordered [${timespan}] ago.`;
 
-  var returnMessage = `Cannot parse${timespan}`;
-  var isSuccess = false;
-  var numberPart;
-  var remindTime;
+  let returnMessage = `Cannot parse${timespan}`;
+  let isSuccess = false;
+  let numberPart;
+  let remindTime;
 
   if (timespan.includes("min")) {
     numberPart = Number(timespan.replace("min", ""));
@@ -34,7 +34,7 @@ function processRemind(messageString) {
     isSuccess = true;
   }
 
-  var retObj = {
+  let retObj = {
     returnMessage: returnMessage,
     isSuccess: isSuccess
   };
@@ -52,12 +52,12 @@ function processRemind(messageString) {
  */
 function processTopic(messageString) {
   messageString = messageString.replace("!topic ", "");
-  var tokens = messageString.split(" ");
-  if (!tokens.length === 1) {
+  let tokens = messageString.split(" ");
+  if (!(tokens.length === 1)) {
     tokens.shift();
   }
-  var newTheme = tokens.join(" ");
-  var returnMessage = `Changing topic to ${newTheme}`;
+  let newTheme = tokens.join(" ");
+  let returnMessage = `Changing topic to ${newTheme}`;
   status["theme"] = newTheme;
   return { returnMessage: returnMessage };
 }
